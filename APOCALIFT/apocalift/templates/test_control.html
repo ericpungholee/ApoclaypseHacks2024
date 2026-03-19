@@ -1,137 +1,46 @@
 {% extends "layout.html" %}
 {% block content %}
-
 <script src="{{ url_for('static', filename='main.js') }}"></script>
 
-<div id="map"></div>
-<div class="instruction-card">
-    <span>W: Forward</span>
-    <span>A: Left</span>
-    <span>D: Right</span>
+<div class="control-layout">
+    <div class="video-stream">
+        <iframe src="{{ video_feed_url }}" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+
+    <div class="control-panels">
+        <div class="instruction-card">
+            <span>W: Forward</span>
+            <span>A: Left</span>
+            <span>D: Right</span>
+        </div>
+
+        <div class="info-menu">
+            <ul>
+                <li>Coordinates: <span id="coordinates">{{ coordinate[0] }}, {{ coordinate[1] }}</span></li>
+                <li>Power: <span id="power">{{ power }}</span></li>
+                <li>Latitude: <span id="latitude">{{ latitude }}</span></li>
+                <li>Longitude: <span id="longitude">{{ longitude }}</span></li>
+            </ul>
+        </div>
+    </div>
 </div>
 
-<div class="info-menu">
-    <ul>
-        <li>Coordinates: <span id="coordinates">{{ coordinate[0] }}, {{ coordinate[1] }}</span></li>
-        <li>Power: <span id="power">{{ power }}</span></li>
-        <li>Latitude: <span id="latitude">{{ latitude }}</span></li>
-        <li>Longitude: <span id="longitude">{{ longitude }}</span></li>
-    </ul>
-</div>
-
-<!-- Video stream element -->
-<div class="video-stream">
-    <iframe src="http://10.93.92.140:5000/" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-</div>
-
-<script src="" async defer></script>
 <script>
-    let map, marker;
-
-    function initMap() {
-        const initialPosition = { lat: {{ coordinate[0] }}, lng: {{ coordinate[1] }} };
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: initialPosition,
-            zoom: 15
-        });
-        marker = new google.maps.Marker({
-            position: initialPosition,
-            map: map,
-            title: 'Current Location'
-        });
-
-        if (navigator.geolocation) {
-            navigator.geolocation.watchPosition(updatePosition, handleError, {
-                enableHighAccuracy: true,
-                timeout: 5000,
-                maximumAge: 0
-            });
-        } else {
-            alert("Geolocation is not supported by this browser.");
-        }
-    }
-
     function updatePosition(position) {
-        const newPos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-        };
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
 
-        marker.setPosition(newPos);
-        map.setCenter(newPos);
-
-        document.getElementById('coordinates').textContent = newPos.lat + ', ' + newPos.lng;
-        document.getElementById('latitude').textContent = newPos.lat;
-        document.getElementById('longitude').textContent = newPos.lng;
+        document.getElementById("coordinates").textContent = `${latitude}, ${longitude}`;
+        document.getElementById("latitude").textContent = latitude;
+        document.getElementById("longitude").textContent = longitude;
     }
 
-    function handleError(error) {
-        console.warn(`ERROR(${error.code}): ${error.message}`);
+    if (navigator.geolocation) {
+        navigator.geolocation.watchPosition(updatePosition, console.warn, {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0,
+        });
     }
 </script>
-
-<style>
-    #map {
-        position: fixed;
-        top: 20px;
-        right: -1100px;
-        width: 300px;
-        height: 200px;
-        z-index: 1000;
-        border: 2px solid #fff;
-        border-radius: 10px;
-    }
-
-    .instruction-card {
-        position: absolute;
-        bottom: 20px;
-        left: 700px;
-        background-color: rgba(0, 0, 0, 0.5);
-        color: #fff;
-        padding: 10px;
-        border-radius: 50px;
-        border: 2px solid #fff;
-    }
-
-    .info-menu {
-        position: fixed;
-        top: 230px;
-        right: 200px;
-        width: 300px;
-        background-color: rgba(0, 0, 0, 0.8);
-        color: white;
-        padding: 10px;
-        border: 2px solid #fff;
-        border-radius: 10px;
-    }
-
-    .info-menu ul {
-        list-style-type: none;
-        padding: 0;
-    }
-
-    .info-menu li {
-        margin: 5px 0;
-    }
-
-    .video-stream {
-        position: absolute;
-        top: 20px;
-        left: 450px;
-        width: 640px;
-        height: 480px;
-        z-index: 999;
-        border: 2px solid #fff;
-        border-radius: 10px;
-        background-color: #000;
-        transform: rotate(180deg);
-    }
-
-    .video-stream iframe {
-        width: 100%;
-        height: 100%;
-        border-radius: 10px;
-    }
-</style>
-
-{% endblock %}
+{% endblock content %}

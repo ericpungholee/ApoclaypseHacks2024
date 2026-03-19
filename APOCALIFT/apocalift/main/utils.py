@@ -1,29 +1,19 @@
-# Importing Libraries 
-import serial 
-import time 
+import time
 
-# ADJUST SPEED & ANGLE HERE
-# speed must be a 2 digit value
-SPEED_PERCENTAGE = '50'
-SERVO_LEFT_BOUND = '135'
-SERVO_RIGHT_BOUND = '45'
+
+SPEED_PERCENTAGE = "50"
+SERVO_LEFT_BOUND = "135"
+SERVO_RIGHT_BOUND = "45"
 SERVO_MID = "100"
 
-def init_arduino():
-    # must be COM19
-    arduino = serial.Serial(port='COM19', baudrate=115200, timeout=.1) 
-    return arduino
 
-def write_read(x, arduino): 
-    arduino.write(bytes(x, 'utf-8')) 
-    time.sleep(0.05) 
-    data = arduino.readline() 
-    return data 
+def init_arduino(port, baudrate, timeout=0.1):
+    import serial
 
-if __name__ == "__main__":
+    return serial.Serial(port=port, baudrate=baudrate, timeout=timeout)
 
-    ard = init_arduino()
 
-    while True: 
-        num = input("Enter a number: ") # Taking input from user 
-        value = write_read(num, ard) 
+def write_read(command, arduino):
+    arduino.write(command.encode("utf-8"))
+    time.sleep(0.05)
+    return arduino.readline()

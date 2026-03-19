@@ -1,35 +1,36 @@
-var pressed = [];
-const timeout = 100;
+const pressedKeys = new Set();
+const controlKeys = new Set(["w", "a", "d"]);
+const pollIntervalMs = 100;
 
-function onkeypressed(e){
-    pressed[e.keyCode] = e.type == 'keydown';
-}
-
-function checkkeys(){
-    let flag = false;
-    var downed = []
-    for (i in pressed){
-        if (pressed[i]){
-            console.log(i);
-            downed.push(i);
-            flag = true;
-        }
+function updatePressedKeys(event) {
+    const key = event.key.toLowerCase();
+    if (!controlKeys.has(key)) {
+        return;
     }
-    if (!flag) console.log("No keys pressed");
 
-    $.ajax({ 
-        url: '/receive_keypress', 
-        type: 'POST', 
-        data: JSON.stringify({ 'value': downed }), 
-        contentType: 'application/json',
-        error: function(error) { 
-            console.log(error); 
-        } 
-    }); 
+    if (event.type === "keydown") {
+        pressedKeys.add(key);
+    } else {
+        pressedKeys.delete(key);
+    }
 }
 
-document.addEventListener('keydown', onkeypressed);
-document.addEventListener('keyup', onkeypressed);
-setInterval(checkkeys, timeout)
+async function sendPressedKeys() {
+    try {
+        await fetch("/receive_keypress", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ value: [...pressedKeys] }),
+        });
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+document.addEventListener("keydown", updatePressedKeys);
+document.addEventListener("keyup", updatePressedKeys);
+setInterval(sendPressedKeys, pollIntervalMs);
 
 

@@ -1,49 +1,53 @@
-
 {% extends "layout.html" %}
 {% block content %}
-<div class="content">
-    <div class="card-body">
-      <h5 class="card-title text-center font-weight-bold mb-4">About</h5>
-      <p class="card-text text-justify">Our platform provides a remote-controlled drone and RC vehicle rental service tailored for zombie apocalypse survivors, enabling them to explore, monitor, or navigate zombie-infested terrains safely from a distance. Users can control vehicles remotely, accessing real-time video and telemetry data along with maps to assist in various mission-based rentals. These missions, which include scouting, resource collection, and exploring safe passages, not only help users manage survival but also influence their ratings and the stats of the vehicles they rent.</p>
-    </div>
-    <h1 class="text-center">Meet Our Team</h1>
-  <div class="founder-profiles" style="display: flex; justify-content: center; flex-wrap: wrap;">
-    
-    <div class="founder" style="text-align: center; padding: 20px; flex: 1; min-width: 250px; max-width: 33%;">
-        <img src="{{ url_for('static', filename='Rohan.jpeg') }}" alt="Founder 1" class="profile-pic">
-        <h3>Rohan Katreddy</h3>
-        <p>Rohan oversees the wireless control, live video feed systems, and hardware integration, ensuring seamless performance and reliability.</p>
-        <a href="https://www.linkedin.com/in/rohan-katreddy-6607a726a/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-        <a href="https://github.com/RohanKatreddy" target="_blank"><i class="fab fa-github"></i> LinkedIn</a>
-      </div>
-      
-    <div class="founder" style="text-align: center; padding: 20px; flex: 1; min-width: 250px; max-width: 33%;">
-        <img src="{{ url_for('static', filename='Eric.jpg') }}" alt="Founder 1" class="profile-pic">
-        <h3>Eric Lee</h3>
-        <p>Eric leads the web development efforts, focusing on integrating telemetry and video into the mission control page. He also shaped the product concepts and ideas.</p>
-        <a href="https://www.linkedin.com/in/eric-lee-932502215/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-        <a href="https://github.com/ericpungholee" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-      </div>
+<div class="content-stack">
+    <section class="panel about-panel">
+        <h5 class="text-center font-weight-bold mb-4">About</h5>
+        <p>Our platform provides a remote-controlled drone and RC vehicle rental service tailored for zombie apocalypse survivors, enabling them to explore, monitor, or navigate zombie-infested terrains safely from a distance. Users can control vehicles remotely, accessing real-time video and telemetry data along with maps to assist in various mission-based rentals. These missions include scouting, resource collection, and exploring safe passages.</p>
+    </section>
 
-      <div class="founder" style="text-align: center; padding: 20px; flex: 1; min-width: 250px; max-width: 33%;">
-        <img src="{{ url_for('static', filename='Victor.jpeg') }}" alt="Founder 1" class="profile-pic">
-        <h3>Victor Huang</h3>
-        <p>Victor specializes in creating algorithms for detecting targets and improving accuracy, crucial for enhancing the system's capabilities.</p>
-        <a href="https://www.linkedin.com/in/victor-huang-053961265/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-        <a href= "https://github.com/vichua2006" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-      </div>
+    <section class="panel">
+        <h1 class="text-center mb-4">Meet Our Team</h1>
+        <div class="team-grid">
+            <article class="team-member">
+                <img src="{{ url_for('static', filename='Rohan.jpeg') }}" alt="Rohan Katreddy" class="profile-pic">
+                <h3>Rohan Katreddy</h3>
+                <p>Rohan oversees the wireless control, live video feed systems, and hardware integration, ensuring seamless performance and reliability.</p>
+                <div class="team-links">
+                    <a href="https://www.linkedin.com/in/rohan-katreddy-6607a726a/" target="_blank" rel="noreferrer"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="https://github.com/RohanKatreddy" target="_blank" rel="noreferrer"><i class="fab fa-github"></i> GitHub</a>
+                </div>
+            </article>
 
-      <div class="founder" style="text-align: center; padding: 20px; flex: 1; min-width: 250px; max-width: 33%;">
-        <img src="{{ url_for('static', filename='icon logo.png') }}" alt="Founder 1" class="profile-pic">
-        <h3>Jayden Li</h3>
-        <p>Jayden, alongside Rohan, contributed to vehicle technology.</p>
-        <a href="" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-        <a href= "https://github.com/Jayden-boop" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-      </div>
-  </div>
-  </div>
+            <article class="team-member">
+                <img src="{{ url_for('static', filename='Eric.jpg') }}" alt="Eric Lee" class="profile-pic">
+                <h3>Eric Lee</h3>
+                <p>Eric leads the web development efforts, focusing on integrating telemetry and video into the mission control page. He also shaped the product concepts and ideas.</p>
+                <div class="team-links">
+                    <a href="https://www.linkedin.com/in/eric-lee-932502215/" target="_blank" rel="noreferrer"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="https://github.com/ericpungholee" target="_blank" rel="noreferrer"><i class="fab fa-github"></i> GitHub</a>
+                </div>
+            </article>
 
-{% endblock content %}  
+            <article class="team-member">
+                <img src="{{ url_for('static', filename='Victor.jpeg') }}" alt="Victor Huang" class="profile-pic">
+                <h3>Victor Huang</h3>
+                <p>Victor specializes in creating algorithms for detecting targets and improving accuracy, crucial for enhancing the system's capabilities.</p>
+                <div class="team-links">
+                    <a href="https://www.linkedin.com/in/victor-huang-053961265/" target="_blank" rel="noreferrer"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="https://github.com/vichua2006" target="_blank" rel="noreferrer"><i class="fab fa-github"></i> GitHub</a>
+                </div>
+            </article>
 
- 
-
+            <article class="team-member">
+                <img src="{{ url_for('static', filename='icon logo.png') }}" alt="Jayden Li" class="profile-pic">
+                <h3>Jayden Li</h3>
+                <p>Jayden, alongside Rohan, contributed to vehicle technology.</p>
+                <div class="team-links">
+                    <a href="https://github.com/Jayden-boop" target="_blank" rel="noreferrer"><i class="fab fa-github"></i> GitHub</a>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+{% endblock content %}
