@@ -31,9 +31,8 @@ We built a full-stack system that turns drones into on-demand, internet-controll
 ---
 
 ## Demo
-
 [![ApocaLift demo — click to watch on YouTube](https://img.youtube.com/vi/tAjU9ZEyOP8/hqdefault.jpg)](https://youtu.be/tAjU9ZEyOP8)
-
+Click on the video
 - Live drone control via browser
 - Real-time video and control interface
 - Command transmission to physical drone hardware
