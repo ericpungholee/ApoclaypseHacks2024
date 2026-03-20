@@ -4,6 +4,14 @@
 
 ---
 
+## Demo
+[![ApocaLift demo — click to watch on YouTube](https://img.youtube.com/vi/tAjU9ZEyOP8/hqdefault.jpg)](https://youtu.be/tAjU9ZEyOP8)
+Click on the video
+- Live drone control via browser
+- Real-time video and control interface
+- Command transmission to physical drone hardware
+---
+
 ## Problem
 
 In emergency, remote, or high-risk environments, getting physical access is slow, expensive, or dangerous.
@@ -27,15 +35,6 @@ ApocaLift lets users:
 - remotely control the drone in real time
 
 We built a full-stack system that turns drones into on-demand, internet-controlled services, similar to how Uber turned cars into on-demand transportation.
-
----
-
-## Demo
-[![ApocaLift demo — click to watch on YouTube](https://img.youtube.com/vi/tAjU9ZEyOP8/hqdefault.jpg)](https://youtu.be/tAjU9ZEyOP8)
-Click on the video
-- Live drone control via browser
-- Real-time video and control interface
-- Command transmission to physical drone hardware
 
 ---
 
